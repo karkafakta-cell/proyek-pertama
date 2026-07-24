@@ -1,69 +1,64 @@
-// 1. DATABASE PALSU (Cukup tambah/kurang data di dalam kotak kurung ini)
-const databaseMember = [
-    {
-        nama: "Andi_Gamer",
-        role: "Server Owner / Carry",
-        games: "Valorant, Mobile Legends",
-        bio: "Tidur itu untuk orang lemah, mabar nomor satu!",
-        joinDate: "12 April 2024",
-        avatarSeed: "Andi"
-    },
-    {
-        nama: "Siti_Bot",
-        role: "Admin / DJ Server",
-        games: "Genshin Impact, Minecraft",
-        bio: "Yang rusuh di Voice Channel langsung ku-mute.",
-        joinDate: "15 Januari 2025",
-        avatarSeed: "Siti"
-    },
-    {
-        nama: "Budi_Rambo",
-        role: "Rusher Beban",
-        games: "Free Fire, PUBG",
-        bio: "Maju paling depan, mati paling awal.",
-        joinDate: "01 Maret 2025",
-        avatarSeed: "Budi"
-    }
-    // 💡 KALAU MAU TAMBAH TEMAN BARU, CUKUP COPY-PASTE DARI TANDA { SAMPAI } DI ATAS LALU TARUH DI SINI
-];
+// 1. URL DATABASE FIREBASE UTAMAMU
+const URL_DATABASE = "https://firebasedatabase.app";
 
-// 2. FUNGSI UNTUK MEMBUAT KARTU MEMBER OTOMATIS KE HTML
-function cetakKartuMember() {
+// 2. FUNGSI UNTUK MENGAMBIL DATA (FETCHING) DARI DATABASE ASLI
+async function ambilDataDariDatabase() {
     const gridContainer = document.getElementById("grid-member");
-    
-    // Looping (mengulang) untuk membaca isi database satu per satu
-    databaseMember.forEach((member, index) => {
-        // Bikin kotak kartu baru
-        const kartu = document.createElement("div");
-        kartu.className = "card-member";
-        
-        // Atur agar ketika kartu diklik, dia membuka pop-up dengan data miliknya
-        kartu.onclick = () => bukaProfil(index);
-        
-        // Isi konten di dalam kartu
-        kartu.innerHTML = `
-            <img src="https://dicebear.com{member.avatarSeed}" alt="Avatar" class="avatar">
-            <h4>${member.nama}</h4>
-            <p class="role">${member.role}</p>
-            <button class="btn-detail">Lihat Profil</button>
-        `;
-        
-        // Masukkan kartu yang sudah jadi ke dalam grid di HTML
-        gridContainer.appendChild(kartu);
-    });
+    gridContainer.innerHTML = "<p style='color: #00ffcc;'>Menghubungkan ke database cloud...</p>";
+
+    try {
+        const respon = await fetch(URL_DATABASE);
+        const dataJson = await respon.json();
+
+        // Bersihkan tulisan loading
+        gridContainer.innerHTML = "";
+
+        if (!dataJson) {
+            gridContainer.innerHTML = "<p style='color: #ff007f;'>Database kosong! Tambahkan data lewat halaman admin.</p>";
+            return;
+        }
+
+        // ============================================================
+        // 🔽 DI SINI LETAK KODE YANG KAMU TANYAKAN TADI TEMPATNYA 🔽
+        // ============================================================
+        Object.keys(dataJson).forEach((key) => {
+            const member = dataJson[key];
+            
+            const kartu = document.createElement("div");
+            kartu.className = "card-member";
+            
+            // Mengirim objek member langsung ketika kartu diklik
+            kartu.onclick = () => bukaProfil(member);
+            
+            // Membuat tampilan kartu neon di HTML
+            kartu.innerHTML = `
+                <img src="https://dicebear.com{member.avatarSeed}" alt="Avatar" class="avatar">
+                <h4>${member.nama}</h4>
+                <p class="role">${member.role}</p>
+                <button class="btn-detail">Lihat Profil</button>
+            `;
+            
+            gridContainer.appendChild(kartu);
+        });
+        // ============================================================
+        // 🔼 BATAS KODE PERUBAHAN 🔼
+        // ============================================================
+
+    } catch (error) {
+        console.error("Gagal koneksi ke database:", error);
+        gridContainer.innerHTML = "<p style='color: #ff007f;'>Gagal menyambungkan ke database asli!</p>";
+    }
 }
-s
+
 // 3. FUNGSI POP-UP DETAIL
-function bukaProfil(index) {
+function bukaProfil(member) {
     const modal = document.getElementById("modal-profil");
-    const data = databaseMember[index]; // Ambil data berdasarkan kartu yang diklik
     
-    // Masukkan data ke kotak pop-up
-    document.getElementById("modal-nama").innerText = data.nama;
-    document.getElementById("modal-role").innerText = data.role;
-    document.getElementById("modal-games").innerText = data.games;
-    document.getElementById("modal-bio").innerText = data.bio;
-    document.getElementById("modal-join").innerText = data.joinDate;
+    document.getElementById("modal-nama").innerText = member.nama;
+    document.getElementById("modal-role").innerText = member.role;
+    document.getElementById("modal-games").innerText = member.games;
+    document.getElementById("modal-bio").innerText = member.bio;
+    document.getElementById("modal-join").innerText = member.joinDate;
     
     modal.style.display = "block";
 }
@@ -72,5 +67,5 @@ function tutupProfil() {
     document.getElementById("modal-profil").style.display = "none";
 }
 
-// Jalankan pencetakan kartu saat halaman web pertama kali dibuka
-cetakKartuMember();
+// Jalankan fungsi penarikan data cloud saat website dibuka pertama kali
+ambilDataDariDatabase();

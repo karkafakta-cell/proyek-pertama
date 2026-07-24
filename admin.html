@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Tambah Member</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <h1 class="nav-logo">👾 CONTROL PANEL</h1>
+        <div class="nav-links">
+            <a href="index.html">← Kembali ke Web Utama</a>
+        </div>
+    </nav>
+
+    <main class="container container-admin">
+        <section class="section-box">
+            <h3 class="section-title">📥 Tambah Member Baru</h3>
+            
+            <!-- Formulir Input -->
+            <form id="form-member" class="card-member card-form">
+                <div class="form-group">
+                    <label class="form-label">Nama Discord:</label>
+                    <input type="text" id="input-nama" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Role / Jabatan:</label>
+                    <input type="text" id="input-role" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Game Favorit:</label>
+                    <input type="text" id="input-games" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Status / Bio:</label>
+                    <textarea id="input-bio" class="form-input form-textarea" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Link Foto Profil / Seed Avatar:</label>
+                    <input type="text" id="input-avatar" class="form-input" placeholder="Contoh: Budi atau link foto" required>
+                </div>
+
+                <button type="submit" class="btn-detail btn-submit">🚀 Simpan ke Database</button>
+            </form>
+            
+            <p id="pesan-sukses" class="text-sukses">Data berhasil dikirim!</p>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>
