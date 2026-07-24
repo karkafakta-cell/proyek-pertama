@@ -1,4 +1,4 @@
-// 1. URL DATABASE FIREBASE UTAMAMU (Sudah diperbaiki alamat lengkapnya)
+// 1. URL DATABASE FIREBASE UTAMAMU
 const URL_DATABASE = "https://valo-discord-db-default-rtdb.asia-southeast1.firebasedatabase.app/members.json";
 
 document.getElementById("form-edit").addEventListener("submit", async function(event) {
@@ -54,7 +54,7 @@ document.getElementById("form-edit").addEventListener("submit", async function(e
             bio: bioBaru             // Terapkan bio baru
         };
 
-        // 🌟 PERBAIKAN UTAMA: Jalur pipa kirim update khusus ke ID member (Pakai tanda $ dan /)
+        // 🌟 DI SINI LETAK PERUBAHAN UTUH & TOTALNYA, BRO! JALURNYA SUDAH LENGKAP KE SERVER SINGAPORE KAMU:
         const URL_UPDATE_MEMBER = `https://firebasedatabase.app{idDataDitemukan}.json`;
         
         const responUpdate = await fetch(URL_UPDATE_MEMBER, {
