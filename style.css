@@ -285,3 +285,49 @@ body {
     margin: 0;
     line-height: 1.4;
 }
+
+
+/* --- 👾 AKSEN KAPSUL GAME GAYA DISCORD (TEMPEL DI PALING BAWAH) --- */
+
+/* Wadah untuk menampung kapsul game agar rapi di tengah kartu */
+.game-collection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+/* Desain kotak kapsul mini ala Discord Profile */
+.badge-game {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 🎨 ATURAN WARNA KAPSUL (Disesuaikan dengan tema game asli) */
+.bg-valorant {
+    background-color: #ff4655; /* Merah Valorant */
+}
+
+.bg-roblox {
+    background-color: #111111; /* Hitam pekat Roblox */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bg-minecraft {
+    background-color: #2b8a3e; /* Hijau Rumput Minecraft */
+}
+
+.bg-mobilelegends {
+    background-color: #fcc419; /* Emas/Kuning MLBB */
+    color: #000000; /* Teks hitam agar kontras dan terbaca */
+}
+
+.bg-gamelainnya {
+    background-color: #4dabf7; /* Biru muda bawaan untuk game input manual */
+}

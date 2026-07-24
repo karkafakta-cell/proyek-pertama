@@ -1,7 +1,7 @@
 // 1. URL DATABASE FIREBASE UTAMAMU
 const URL_DATABASE = "https://valo-discord-db-default-rtdb.asia-southeast1.firebasedatabase.app/members.json";
 
-// 2. FUNGSI UNTUK MENGAMBIL DATA (FETCHING) DARI DATABASE ASLI
+// 2. FUNGSI UNTUK MENGAMBIL DATA DARI FIREBASE CLOUD
 async function ambilDataDariDatabase() {
     const gridContainer = document.getElementById("grid-member");
     gridContainer.innerHTML = "<p style='color: #228be6;'>Menghubungkan ke database cloud...</p>";
@@ -19,7 +19,7 @@ async function ambilDataDariDatabase() {
         }
 
         // ============================================================
-        // 🌟 LOGIKA PEMBACAAN DATA: SUDAH DIPERBAIKI UTK FOTO GALERI
+        // 🌟 LOGIKA CETAK KARTU ALA DISCORD PROFILE (GLASSMORPHISM)
         // ============================================================
         Object.keys(dataJson).forEach((key) => {
             const member = dataJson[key];
@@ -31,22 +31,51 @@ async function ambilDataDariDatabase() {
 
             // LOGIKA AVATAR SUPER PINTAR:
             let urlAvatar = member.avatarSeed;
-            
             if (!urlAvatar) {
-                // Jika data foto kosong, kasih foto siluet abu-abu bawaan
+                // Jika data foto kosong, kasih foto siluet profil abu-abu bawaan
                 urlAvatar = "https://w3schools.com";
             } else if (urlAvatar.startsWith("data:image") || urlAvatar.startsWith("http")) {
-                // SAKTI! Jika isinya FOTO GALERI (data:image) atau LINK INTERNET (http), gunakan langsung gambarnya!
+                // Sakti! Jika isinya FOTO GALERI (Base64) atau LINK INTERNET, gunakan langsung gambarnya!
                 urlAvatar = member.avatarSeed;
             } else {
-                // Jika isinya ketikan teks biasa (misal: Budi), buat jadi robot otomatis versi 9.x yang aktif
-                urlAvatar = `https://dicebear.com/api/initials/${member.avatarSeed}`;
+                // Jika isinya hanya ketikan teks biasa, buat jadi robot otomatis versi 9.x yang aktif
+                urlAvatar = `https://dicebear.com{member.avatarSeed}`;
             }
 
+            // 🧠 LOGIKA PINTAR PEMECAH KAPSUL GAME DISCORD:
+            // Kita pecah teks game (misal: "Valorant, Roblox") berdasarkan tanda koma menjadi daftar terpisah
+            const daftarGame = member.games ? member.games.split(",") : [];
+            let htmlKapsulGame = `<div class="game-collection">`;
+
+            if (daftarGame.length > 0 && member.games !== "") {
+                daftarGame.forEach((namaGame) => {
+                    const gameBersih = namaGame.trim(); // Bersihkan spasi sisa di depan/belakang teks
+                    const gameKecil = gameBersih.toLowerCase();
+                    
+                    // Deteksi warna background kapsul otomatis berdasarkan nama gamenya
+                    let kelasWarna = "bg-gamelainnya";
+                    if (gameKecil.includes("valorant")) kelasWarna = "bg-valorant";
+                    else if (gameKecil.includes("roblox")) kelasWarna = "bg-roblox";
+                    else if (gameKecil.includes("minecraft")) kelasWarna = "bg-minecraft";
+                    else if (gameKecil.includes("mobile legend")) kelasWarna = "bg-mobilelegends";
+
+                    // Gabungkan menjadi tag badge bergaya Discord
+                    htmlKapsulGame += `<span class="badge-game ${kelasWarna}">${gameBersih}</span>`;
+                });
+            } else {
+                htmlKapsulGame += `<span class="badge-game bg-gamelainnya">-</span>`;
+            }
+            htmlKapsulGame += `</div>`;
+
+            // Cetak struktur kartu baru ke halaman utama
             kartu.innerHTML = `
                 <img src="${urlAvatar}" alt="Avatar" class="avatar">
                 <h4>${member.nama}</h4>
                 <p class="role">${member.role || "Member"}</p>
+                
+                <!-- 🔽 KAPSUL GAME DISCORD AUTOMATIC GENERATOR 🔽 -->
+                ${htmlKapsulGame}
+                
                 <button class="btn-detail">Lihat Profil</button>
             `;
             
