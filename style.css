@@ -1,50 +1,82 @@
-/* 1. WARNA UTAMA & LATAR BELAKANG (Campuran Abu-abu Terang & Putih) */
+/* 1. LATAR BELAKANG GRADASI PREMIUM CERAH */
 body {
-    background-color: #f0f2f5; /* Abu-abu sangat terang dan bersih */
-    color: #2c3e50; /* Tulisan abu-abu gelap agar nyaman dibaca */
+    /* Menggunakan gradasi miring lembut dari abu-abu terang ke biru pastel cerah */
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4ecf7 100%);
+    background-attachment: fixed;
+    color: #2c3e50; /* Warna teks abu-abu gelap kebiruan agar tajam dibaca */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* 2. NAVBAR & HERO (Putih Bersih dengan Aksen Biru Muda) */
+/* 2. NAVBAR EFEK KACA TRANSPARAN (GLASSMORPHISM) */
 .navbar {
-    background-color: #ffffff; /* Putih bersih */
+    background: rgba(255, 255, 255, 0.75); /* Putih transparan halus */
+    backdrop-filter: blur(12px); /* Memberi efek blur mewah pada latar belakang */
+    -webkit-backdrop-filter: blur(12px);
     padding: 15px 30px;
-    border-bottom: 3px solid #74c0fc; /* Batas bawah biru muda lembut */
-    box-shadow: 0 2px 10px rgba(116, 192, 252, 0.15); /* Bayangan biru tipis halus */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Garis kilau kaca */
+    box-shadow: 0 4px 15px rgba(116, 192, 252, 0.1); /* Bayangan biru tipis */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 .nav-logo {
-    color: #228be6; /* Biru muda teknologi */
-    text-shadow: 0 0 4px rgba(34, 139, 230, 0.2);
+    color: #228be6; /* Biru muda teknologi cerah */
+    text-shadow: 0 0 10px rgba(34, 139, 230, 0.15);
     margin: 0;
     font-size: 24px;
+    font-weight: 800;
 }
-.hero {
-    text-align: center;
-    padding: 50px 20px;
-    background: linear-gradient(#ffffff, #f0f2f5); /* Gradasi putih ke abu-abu */
+.nav-links a {
+    color: #495057;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 20px;
+    transition: all 0.2s ease;
 }
-.hero h2 {
-    color: #1c7ed6; /* Biru langit cerah */
-    text-shadow: 0 0 4px rgba(28, 126, 214, 0.1);
-    font-size: 32px;
+.nav-links a:hover {
+    color: #228be6;
+    transform: translateY(-1px);
 }
 
-/* 3. KOTAK KONTEN */
+/* 3. HERO BANNER MINIMALIS MODERN */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: transparent; /* Latar belakang tembus pandang mengikuti gradasi bodi */
+}
+.hero h2 {
+    color: #1c7ed6; /* Biru langit tegas */
+    text-shadow: 0 0 12px rgba(28, 126, 214, 0.1);
+    font-size: 36px;
+    font-weight: 800;
+}
+.hero p {
+    color: #4dabf7; /* Biru muda indigo lembut */
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* 4. KOTAK KONTEN UTAMA */
 .container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
 }
 .section-title {
-    color: #1c7ed6; /* Biru langit cerah */
-    border-bottom: 2px solid #74c0fc; /* Garis bawah biru muda */
-    padding-bottom: 10px;
-    text-shadow: 0 0 2px rgba(28, 126, 214, 0.1);
+    color: #1c7ed6;
+    border-left: 5px solid #74c0fc; /* Aksen garis vertikal biru di kiri judul */
+    border-bottom: none; /* Menghilangkan garis bawah jadul */
+    padding-left: 12px;
+    font-size: 22px;
+    font-weight: 700;
 }
 
-/* 4. GRID & KARTU MEMBER (Putih Bersih dengan Border Abu Lembut) */
+/* 5. GRID & KARTU MEMBER GAYA KACA PREMIUM */
 .grid-member {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -52,98 +84,114 @@ body {
     margin-top: 20px;
 }
 .card-member {
-    background-color: #ffffff; /* Kotak putih bersih */
-    border: 2px solid #e9ecef; /* Garis batas abu-abu sangat tipis */
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.45); /* Panel transparan kaca */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Kilau luar kaca */
+    border-radius: 18px; /* Sudut lebih melengkung mewah */
     text-align: center;
-    padding: 20px;
+    padding: 25px 20px;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.03);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Efek gerak sangat halus */
 }
-/* Efek saat kursor menyentuh kartu: bayangan biru muda melebar lembut */
+/* Efek Hover Mewah: Kartu naik ke atas, background menebal, bayangan biru menyala lembut */
 .card-member:hover {
+    background: rgba(255, 255, 255, 0.8);
     border-color: #74c0fc;
-    box-shadow: 0 8px 20px rgba(116, 192, 252, 0.25);
-    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(116, 192, 252, 0.25);
+    transform: translateY(-8px);
 }
 .avatar {
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
-    border: 2px solid #74c0fc; /* Lingkaran foto biru muda */
-    box-shadow: 0 0 6px rgba(116, 192, 252, 0.3);
+    border: 4px solid #ffffff; /* Bingkai putih tebal tegap */
+    box-shadow: 0 4px 14px rgba(116, 192, 252, 0.3); /* Bayangan lembut melingkar */
     background-color: #f8f9fa;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    object-fit: cover;
 }
 .card-member h4 {
-    color: #212529; /* Teks nama warna abu gelap gelap */
+    color: #212529;
     margin: 10px 0 5px 0;
+    font-size: 19px;
+    font-weight: 700;
 }
 .role {
-    color: #228be6; /* Teks role biru muda */
-    font-size: 13px;
+    color: #228be6;
+    font-size: 11px;
     font-weight: bold;
-    text-shadow: 0 0 2px rgba(34, 139, 230, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: rgba(116, 192, 252, 0.15); /* Bungkus teks dengan kapsul transparan */
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
 }
 
-/* 5. TOMBOL DETAIL */
+/* 6. TOMBOL MINIMALIS MODERN */
 .btn-detail {
-    background-color: transparent;
-    color: #228be6; /* Teks biru muda */
-    border: 1px solid #228be6; /* Garis biru muda */
-    padding: 6px 14px;
+    background-color: #74c0fc; /* Warna solid biru muda cerah */
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
     border-radius: 20px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 12px;
     font-weight: bold;
-    transition: 0.2s;
+    font-size: 13px;
+    box-shadow: 0 4px 12px rgba(116, 192, 252, 0.2);
+    transition: all 0.2s ease;
 }
 .btn-detail:hover {
     background-color: #228be6;
-    color: #ffffff; /* Teks berubah putih saat di-hover */
-    box-shadow: 0 4px 10px rgba(34, 139, 230, 0.2);
+    box-shadow: 0 6px 16px rgba(34, 139, 230, 0.35);
 }
 
-/* 6. POP-UP MODAL (Putih Elegan Modis) */
+/* 7. POP-UP MODAL KACA */
 .modal-bg {
     display: none;
     position: fixed;
-    z-index: 100;
+    z-index: 200;
     left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(33, 37, 41, 0.4); /* Gelap transparan halus */
-    backdrop-filter: blur(4px); /* Efek kaca blur di belakang pop-up */
+    background-color: rgba(148, 163, 184, 0.3); /* Blur gelap transparan */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 .modal-content {
-    background-color: #ffffff; /* Kotak pop-up putih bersih */
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     margin: 15% auto;
-    padding: 25px;
-    border: 2px solid #74c0fc; /* Border biru muda */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
     width: 85%; max-width: 400px;
-    border-radius: 12px;
+    border-radius: 20px;
     position: relative;
 }
 .btn-tutup {
-    position: absolute; right: 15px; top: 10px;
+    position: absolute; right: 18px; top: 12px;
     color: #adb5bd; font-size: 28px; font-weight: bold; cursor: pointer;
+    transition: color 0.2s;
 }
 .btn-tutup:hover {
     color: #495057;
 }
 .modal-header h3 {
-    color: #1c7ed6; margin: 0;
+    color: #1c7ed6; font-size: 22px; font-weight: 700;
 }
 .modal-body p {
     margin: 15px 0; font-size: 14px; color: #495057;
-    border-bottom: 1px dashed #f1f3f5; /* Garis batas putus-putus tipis */
+    border-bottom: 1px dashed rgba(116, 192, 252, 0.2); /* Pembatas putus-putus biru tipis */
     padding-bottom: 8px;
 }
+/* Mengubah ketikan tebal (Kategori) di Pop-up jadi warna biru langit */
 .modal-body strong {
-    color: #1c7ed6; /* Label tebal warna biru langit */
+    color: #1c7ed6;
 }
 
-/* --- TAMBAHAN DESAIN KHUSUS HALAMAN ADMIN (PISAHAN DARI HTML) --- */
+/* --- TAMBAHAN DESAIN KHUSUS HALAMAN ADMIN & EDIT --- */
 .container-admin {
     max-width: 500px;
 }
@@ -156,28 +204,28 @@ body {
     margin-bottom: 15px;
 }
 .form-label {
-    color: #1c7ed6; /* Label warna biru langit */
+    color: #1c7ed6;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: bold;
     font-size: 14px;
 }
 .form-input {
     width: 95%;
     padding: 10px;
-    background-color: #f8f9fa; /* Kotak input abu-abu sangat tipis */
-    color: #212529; /* Teks ketikan abu-abu gelap */
-    border: 1px solid #ced4da; /* Border abu-abu biasa */
-    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #212529;
+    border: 1px solid rgba(116, 192, 252, 0.4);
+    border-radius: 8px;
     font-family: inherit;
     transition: 0.2s;
 }
-/* Efek kotak input bersinar biru muda pas diklik/diketik */
+/* Efek bersinar halus saat kotak form diklik/diketik */
 .form-input:focus {
     outline: none;
     background-color: #ffffff;
-    border-color: #74c0fc;
-    box-shadow: 0 0 8px rgba(116, 192, 252, 0.4);
+    border-color: #228be6;
+    box-shadow: 0 0 10px rgba(34, 139, 230, 0.2);
 }
 .form-textarea {
     height: 70px;
@@ -190,61 +238,50 @@ body {
     font-size: 14px;
 }
 .text-sukses {
-    color: #2b8a3e; /* Tulisan sukses berubah jadi hijau aman */
+    color: #2b8a3e;
     text-align: center;
     margin-top: 15px;
     display: none;
     font-weight: bold;
 }
 
-
-
-/* --- TAMBAHAN DESAIN GALERI MEDIA (DITEMPEL DI PALING BAWAH) --- */
-
+/* --- TAMBAHAN DESAIN GALERI MEDIA GLASSMORPHISM --- */
 .link-admin {
-    color: #228be6; 
+    color: #228be6;
     font-weight: bold;
 }
-
 .card-media {
-    text-align: left; 
-    cursor: default; 
-    padding: 15px;
+    text-align: left;
+    cursor: default;
+    padding: 18px;
 }
-
 .img-galeri {
-    width: 100%; 
-    height: 150px; 
-    object-fit: cover; 
-    border-radius: 8px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px; /* Membuat sudut foto galeri lebih melengkung modis */
 }
-
 .video-container {
-    position: relative; 
-    padding-bottom: 56.25%; 
-    height: 0; 
-    overflow: hidden; 
-    border-radius: 8px; 
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px; /* Membuat sudut video melengkung modis */
     background-color: #0b0c10;
 }
-
 .video-container iframe {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    border: none;
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%; border: none;
 }
-
 .media-title {
-    margin: 10px 0 5px 0; 
-    font-size: 16px;
+    margin: 12px 0 5px 0;
+    font-size: 17px;
+    font-weight: 700;
     color: #212529;
 }
-
 .media-desc {
-    color: #666666; 
-    font-size: 13px; 
+    color: #666666;
+    font-size: 13.5px;
     margin: 0;
+    line-height: 1.4;
 }
