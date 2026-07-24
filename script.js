@@ -1,5 +1,5 @@
 // 1. URL DATABASE FIREBASE UTAMAMU
-const URL_DATABASE = "https://firebasedatabase.app";
+const URL_DATABASE = "https://valo-discord-db-default-rtdb.asia-southeast1.firebasedatabase.app/members.json";
 
 // 2. FUNGSI UNTUK MENGAMBIL DATA (FETCHING) DARI DATABASE ASLI
 async function ambilDataDariDatabase() {
