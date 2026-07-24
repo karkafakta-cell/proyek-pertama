@@ -26,18 +26,14 @@ function cekNama() {
     const nama = document.getElementById("input-nama").value.toLowerCase();
     const inputRole = document.getElementById("input-role");
 
-    // Kamu bisa ganti kata "hazfi_owner" atau "dev_ganteng" di bawah ini dengan password rahasia buatanmu!
-    if (nama === "hazfi_owner" || nama === "dev_ganteng") {
+    // Kamu bisa ganti kata "fia_owner" atau "dev_ganteng" di bawah ini dengan password rahasia buatanmu!
+    if (nama === "fia_owner" || nama === "dev_imut") {
         inputRole.disabled = false; // Buka gembok kolom role
         inputRole.style.borderColor = "#228be6"; // Ubah border jadi biru tanda aktif
         if (inputRole.value === "Member") {
             inputRole.value = ""; // Kosongkan tulisan "Member" biar kamu bisa ketik Owner/Dev
         }
-    } else {
-        inputRole.disabled = true; // Kunci kembali jadi member jika nama dihapus/diganti
-        inputRole.value = "Member";
-        inputRole.style.borderColor = "";
-    }
+    } 
 }
 
 // ============================================================
