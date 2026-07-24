@@ -3,68 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Squad Blog</title>
-    <!-- 🔽 JALUR PENGHUBUNG: Baris di bawah ini gunanya untuk memanggil file CSS kamu -->
+    <title>Neon Discord Squad</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 1. NAVIGATION BAR -->
     <nav class="navbar">
-        <h1 class="nav-logo">👾 SQUAD DISCORD</h1>
-        <div class="nav-links">
-            <a href="#kegiatan">Kegiatan</a>
-            <a href="#galeri">Galeri</a>
-            <a href="#member">Member</a>
-        </div>
+        <h1 class="nav-logo">👾 NEON SQUAD</h1>
     </nav>
 
-    <!-- 2. HERO SECTION -->
     <header class="hero">
-        <h2>Basecamp Digital Kami</h2>
-        <p>Tempat menyimpan kenangan mabar, clip lucu, dan profil anak-anak Discord.</p>
+        <h2>Cyber Basecamp Kami</h2>
+        <p>Database rahasia anak-anak Discord yang sering aktif mabar.</p>
     </header>
 
-    <!-- KONTEN UTAMA -->
     <main class="container">
-
-        <!-- 3. BAGIAN KEGIATAN -->
-        <section id="kegiatan" class="section-box">
-            <h3 class="section-title">📅 Kegiatan Seru</h3>
-            <div class="card-kegiatan">
-                <img src="https://unsplash.com" alt="Mabar" class="img-kegiatan">
-                <div class="card-body">
-                    <h4>Malam Minggu Mabar Valorant</h4>
-                    <p>Keseruan custom match 5v5 kemarin malam. Tim A kena comeback epic!</p>
-                </div>
-            </div>
+        <section class="section-box">
+            <h3 class="section-title">👑 Member Cyber Aktif</h3>
+            
+            <!-- 🔽 Kotak ini sengaja dikosongkan, nanti diisi otomatis oleh script.js -->
+            <div id="grid-member" class="grid-member"></div>
         </section>
-
-        <!-- 4. BAGIAN GALERI -->
-        <section id="galeri" class="section-box">
-            <h3 class="section-title">🎬 Foto & Video Clip</h3>
-            <div class="card-galeri">
-                <p>Moments Lucu: Detik-detik salah lempar bomb</p>
-                <div class="video-placeholder">
-                    <span>📺 [Taruh Embed Video Di Sini]</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. BAGIAN PROFIL MEMBER -->
-        <section id="member" class="section-box">
-            <h3 class="section-title">👑 Member Paling Aktif</h3>
-            <div class="grid-member">
-                <!-- Kartu Member 1 -->
-                <div class="card-member">
-                    <img src="https://dicebear.com" alt="Avatar" class="avatar">
-                    <h4>Andi_Gamer</h4>
-                    <p class="role">Server Owner</p>
-                </div>
-            </div>
-        </section>
-
     </main>
 
+    <!-- KOTAK POP-UP DETAIL PROFIL (MODAL) -->
+    <div id="modal-profil" class="modal-bg">
+        <div class="modal-content">
+            <span class="btn-tutup" onclick="tutupProfil()">&times;</span>
+            <div class="modal-header">
+                <h3 id="modal-nama">Nama Member</h3>
+                <p id="modal-role" class="role">Role</p>
+            </div>
+            <div class="modal-body">
+                <p><strong>🎮 Game Favorit:</strong> <span id="modal-games">-</span></p>
+                <p><strong>📝 Status/Bio:</strong> <span id="modal-bio">-</span></p>
+                <p><strong>📅 Bergabung:</strong> <span id="modal-join">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
