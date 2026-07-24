@@ -65,6 +65,14 @@
                     <input type="file" id="input-avatar-file" class="form-input" accept="image/*" required style="padding: 5px;">
                 </div>
 
+                <div class="form-group">
+                    <label class="form-label">PIN Rahasia Profil (4 Angka):</label>
+                    <!-- ID input-pin wajib ada agar dibaca oleh file admin.js terbaru -->
+                    <input type="password" id="input-pin" class="form-input" maxlength="4" placeholder="Contoh: 1234" required>
+                    <small style="color: #868e96; display: block; margin-top: 5px; font-size: 11px;">*PIN ini digunakan jika kamu ingin mengedit profilmu nanti.</small>
+                </div>
+
+
 
                 <button type="submit" class="btn-detail btn-submit">🚀 Simpan ke Database</button>
             </form>

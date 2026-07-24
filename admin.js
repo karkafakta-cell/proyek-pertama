@@ -44,7 +44,7 @@ document.getElementById("form-member").addEventListener("submit", async function
     const namaBaru = document.getElementById("input-nama").value;
     const roleBaru = document.getElementById("input-role").value;
     
-    // 🌟 PERBAIKAN: Ambil teks bio, bersihkan spasi, dan cek jika kosong pilih acak!
+    // Ambil teks bio, bersihkan spasi, dan cek jika kosong pilih acak!
     let bioBaru = document.getElementById("input-bio").value.trim();
     if (bioBaru === "") {
         const kumpulanBioKocak = [
@@ -58,6 +58,9 @@ document.getElementById("form-member").addEventListener("submit", async function
         const angkaAcak = Math.floor(Math.random() * kumpulanBioKocak.length);
         bioBaru = kumpulanBioKocak[angkaAcak];
     }
+
+    // 🌟 PERBAIKAN 1: Menangkap nilai input PIN rahasia yang diketik saat daftar
+    const pinBaru = document.getElementById("input-pin").value;
 
     // Menangkap file gambar asli dari File Explorer
     const fileGambar = document.getElementById("input-avatar-file").files[0];
@@ -76,8 +79,9 @@ document.getElementById("form-member").addEventListener("submit", async function
         nama: namaBaru,
         role: roleBaru,
         games: gamesFinal,
-        bio: bioBaru, // Menggunakan variabel bioBaru yang sudah diproses di atas
+        bio: bioBaru, 
         avatarSeed: "", 
+        pin: pinBaru, // 🌟 PERBAIKAN 2: Menyimpan data PIN ke dalam objek untuk dikirim ke Firebase
         joinDate: tanggalHariIni
     };
 
