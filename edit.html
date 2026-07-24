@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profil Member</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <h1 class="nav-logo">👾 EDIT PROFILE</h1>
+        <div class="nav-links">
+            <a href="index.html">← Kembali ke Web Utama</a>
+        </div>
+    </nav>
+
+    <main class="container container-admin">
+        <section class="section-box">
+            <h3 class="section-title">✏️ Perbarui Profilmu</h3>
+            
+            <form id="form-edit" class="card-member card-form">
+                <!-- 1. Kunci Identifikasi Keamanan -->
+                <div class="form-group">
+                    <label class="form-label">Nama Discord Lama (Sesuai di Web):</label>
+                    <input type="text" id="edit-nama-lama" class="form-input" placeholder="Contoh: fia_owner" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Masukkan PIN Rahasiamu:</label>
+                    <input type="password" id="edit-pin" class="form-input" maxlength="4" placeholder="4 Angka" required>
+                </div>
+
+                <!-- Garis pembatas estetik -->
+                <hr style="border: none; border-top: 1px dashed rgba(116, 192, 252, 0.4); margin: 25px 0;">
+
+                <!-- 2. Data Baru yang Ingin Diubah -->
+                <div class="form-group">
+                    <label class="form-label">Nama Discord Baru (Kosongkan jika tidak diubah):</label>
+                    <input type="text" id="edit-nama-baru" class="form-input" placeholder="Mau ganti nama apa?">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Game Favorit Baru:</label>
+                    <select id="edit-games" class="form-input" required>
+                        <option value="Valorant">Valorant</option>
+                        <option value="Minecraft">Minecraft</option>
+                        <option value="Roblox">Roblox</option>
+                        <option value="Mobile Legends">Mobile Legends</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Status / Bio Baru:</label>
+                    <textarea id="edit-bio" class="form-input form-textarea" placeholder="Tulis status barumu di sini..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-detail btn-submit">💾 Terapkan Perubahan</button>
+            </form>
+            
+            <p id="pesan-sukses" class="text-sukses">Profilmu berhasil diperbarui secara live!</p>
+        </section>
+    </main>
+
+    <script src="edit.js"></script>
+</body>
+</html>
