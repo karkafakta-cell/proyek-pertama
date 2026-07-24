@@ -56,11 +56,15 @@
                     <label class="form-label">Status / Bio:</label>
                     <textarea id="input-bio" class="form-input form-textarea" required></textarea>
                 </div>
-
+                
+                <!-- CARI bagian Link Foto Profil / Seed Avatar yang lama, lalu GANTI dengan ini: -->
                 <div class="form-group">
-                    <label class="form-label">Link Foto Profil / Seed Avatar:</label>
-                    <input type="text" id="input-avatar" class="form-input" placeholder="Contoh: Budi atau link foto" required>
+                    <label class="form-label">Foto Profil / Avatar:</label>
+                    <!-- type="file" akan otomatis membuka File Explorer / Galeri HP saat diklik -->
+                    <!-- accept="image/*" artinya hanya boleh memilih file gambar saja -->
+                    <input type="file" id="input-avatar-file" class="form-input" accept="image/*" required style="padding: 5px;">
                 </div>
+
 
                 <button type="submit" class="btn-detail btn-submit">🚀 Simpan ke Database</button>
             </form>
