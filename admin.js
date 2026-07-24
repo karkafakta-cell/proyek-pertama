@@ -41,7 +41,7 @@ function cekNama() {
 document.getElementById("form-member").addEventListener("submit", async function(event) {
     event.preventDefault(); // Mencegah halaman refresh otomatis
 
-    const namaBaru = document.getElementById("input-nama").value;
+    const namaBaru = document.getElementById("input-nama").value.trim(); // Bersihkan spasi depan belakang
     const roleBaru = document.getElementById("input-role").value;
     
     // Ambil teks bio, bersihkan spasi, dan cek jika kosong pilih acak!
@@ -59,7 +59,7 @@ document.getElementById("form-member").addEventListener("submit", async function
         bioBaru = kumpulanBioKocak[angkaAcak];
     }
 
-    // 🌟 PERBAIKAN 1: Menangkap nilai input PIN rahasia yang diketik saat daftar
+    // Menangkap nilai input PIN rahasia yang diketik saat daftar
     const pinBaru = document.getElementById("input-pin").value;
 
     // Menangkap file gambar asli dari File Explorer
@@ -74,6 +74,12 @@ document.getElementById("form-member").addEventListener("submit", async function
 
     const tanggalHariIni = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
+    // Jaga-jaga jika user lupa memilih foto di galeri
+    if (!fileGambar) {
+        alert("Silakan pilih foto profil terlebih dahulu!");
+        return;
+    }
+
     // Struktur dasar data awal
     const dataMemberBaru = {
         nama: namaBaru,
@@ -81,25 +87,41 @@ document.getElementById("form-member").addEventListener("submit", async function
         games: gamesFinal,
         bio: bioBaru, 
         avatarSeed: "", 
-        pin: pinBaru, // 🌟 PERBAIKAN 2: Menyimpan data PIN ke dalam objek untuk dikirim ke Firebase
+        pin: pinBaru, 
         joinDate: tanggalHariIni
     };
 
-    // Jaga-jaga jika user lupa memilih foto di galeri
-    if (!fileGambar) {
-        alert("Silakan pilih foto profil terlebih dahulu!");
-        return;
-    }
+    try {
+        // 🌟 KODE BARU: 1. Ambil data dari Firebase untuk dicek duplikatnya
+        const cekRespon = await fetch(URL_DATABASE);
+        const dataJson = await cekRespon.json();
 
-    // Proses konversi file gambar galeri menjadi kode teks (Base64) secara otomatis
-    const reader = new FileReader();
-    reader.readAsDataURL(fileGambar);
-    
-    reader.onloadend = async function() {
-        const fotoDalamBentukTeks = reader.result;
-        dataMemberBaru.avatarSeed = fotoDalamBentukTeks;
+        let namaSudahAda = false;
 
-        try {
+        // Sisir nama satu per satu (Gunakan .toLowerCase() agar huruf besar-kecil dideteksi sama)
+        if (dataJson) {
+            Object.keys(dataJson).forEach((key) => {
+                if (dataJson[key].nama.toLowerCase() === namaBaru.toLowerCase()) {
+                    namaSudahAda = true;
+                }
+            });
+        }
+
+        // 🌟 KODE BARU: 2. Jika nama kembar ditemukan, langsung batalkan registrasi!
+        if (namaSudahAda) {
+            alert(`❌ Nama "${namaBaru}" sudah terdaftar di website! Silakan gunakan nama Discord lain.`);
+            return; // Hentikan script di sini
+        }
+
+        // 3. Jika nama murni unik, jalankan FileReader untuk memproses gambar
+        const reader = new FileReader();
+        reader.readAsDataURL(fileGambar);
+        
+        reader.onloadend = async function() {
+            const fotoDalamBentukTeks = reader.result;
+            dataMemberBaru.avatarSeed = fotoDalamBentukTeks;
+
+            // Kirim data ke Firebase cloud
             const respon = await fetch(URL_DATABASE, {
                 method: "POST",
                 headers: {
@@ -109,11 +131,9 @@ document.getElementById("form-member").addEventListener("submit", async function
             });
 
             if (respon.ok) {
-                // Tampilkan pesan sukses di layar
                 document.getElementById("pesan-sukses").style.display = "block";
                 document.getElementById("form-member").reset();
                 
-                // Kembalikan form ke kondisi terkunci normal (default) setelah beres submit
                 document.getElementById("input-role").disabled = true;
                 document.getElementById("input-role").value = "Member";
                 document.getElementById("box-game-lainnya").style.display = "none";
@@ -124,9 +144,10 @@ document.getElementById("form-member").addEventListener("submit", async function
             } else {
                 alert("Gagal menyimpan ke database cloud!");
             }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Terjadi kesalahan koneksi!");
-        }
-    }; 
+        }; 
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan koneksi saat memeriksa nama!");
+    }
 });
