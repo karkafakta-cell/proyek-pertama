@@ -21,25 +21,33 @@ async function ambilDataDariDatabase() {
         // ============================================================
         // 🔽 DI SINI LETAK KODE YANG KAMU TANYAKAN TADI TEMPATNYA 🔽
         // ============================================================
-        Object.keys(dataJson).forEach((key) => {
-            const member = dataJson[key];
-            
-            const kartu = document.createElement("div");
-            kartu.className = "card-member";
-            
-            // Mengirim objek member langsung ketika kartu diklik
-            kartu.onclick = () => bukaProfil(member);
-            
-            // Membuat tampilan kartu neon di HTML
-            kartu.innerHTML = `
-                <img src="https://dicebear.com{member.avatarSeed}" alt="Avatar" class="avatar">
-                <h4>${member.nama}</h4>
-                <p class="role">${member.role}</p>
-                <button class="btn-detail">Lihat Profil</button>
-            `;
-            
-            gridContainer.appendChild(kartu);
-        });
+// HAPUS logika let urlAvatar yang lama, lalu PASTE versi baru ini di dalam kartu.innerHTML kalian:
+
+    Object.keys(dataJson).forEach((key) => {
+         const member = dataJson[key];
+        if (!member || !member.nama) return;
+
+        const kartu = document.createElement("div");
+        kartu.className = "card-member";
+        kartu.onclick = () => bukaProfil(member);
+
+        // 🌟 LOGIKA AVATAR BARU: Jika isinya link internet (http) pakai linknya, jika teks biasa pakai API bottts terbaru
+        let urlAvatar = member.avatarSeed;
+        if (!urlAvatar || !urlAvatar.startsWith("http")) {
+        // Kita pakai versi API Dicebear terbaru (/9.x/bottts/svg) agar gambarnya dijamin muncul
+        urlAvatar = `https://dicebear.com{member.avatarSeed || 'default'}`;
+    }
+
+    kartu.innerHTML = `
+        <img src="${urlAvatar}" alt="Avatar" class="avatar">
+        <h4>${member.nama}</h4>
+        <p class="role">${member.role}</p>
+        <button class="btn-detail">Lihat Profil</button>
+    `;
+    
+    gridContainer.appendChild(kartu);
+});
+
         // ============================================================
         // 🔼 BATAS KODE PERUBAHAN 🔼
         // ============================================================
