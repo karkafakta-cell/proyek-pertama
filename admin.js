@@ -1,34 +1,78 @@
-// 1. URL DATABASE FIREBASE KAMU (Sama seperti di script.js)
+// 1. URL DATABASE FIREBASE KAMU
 const URL_DATABASE = "https://valo-discord-db-default-rtdb.asia-southeast1.firebasedatabase.app/members.json";
 
-// 2. TANGKAP TOMBOL SUBMIT FORMULIR
-document.getElementById("form-member").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Mencegah halaman refresh otomatis saat tombol diklik
+// ============================================================
+// 🌟 FITUR 1: LOGIKA DROPDOWN GAME DINAMIS
+// ============================================================
+function cekPilihanGame() {
+    const pilihan = document.getElementById("select-games").value;
+    const kotakInputManual = document.getElementById("box-game-lainnya");
+    const inputManual = document.getElementById("input-game-manual");
 
-    // Ambil data yang diketik user di form
+    if (pilihan === "lainnya") {
+        kotakInputManual.style.display = "block"; // Munculkan kotak teks tambahan
+        inputManual.required = true; // Wajib diisi jika pilih lainnya
+    } else {
+        kotakInputManual.style.display = "none";  // Sembunyikan jika milih game biasa
+        inputManual.required = false;
+        inputManual.value = ""; // Bersihkan ketikan sisa
+    }
+}
+
+// ============================================================
+// 🌟 FITUR 2: BUKA KUNCI ROLE JIKA NAMA ADALAH OWNER / DEV RAHASIA
+// ============================================================
+function cekNama() {
+    const nama = document.getElementById("input-nama").value.toLowerCase();
+    const inputRole = document.getElementById("input-role");
+
+    // Kamu bisa ganti kata "hazfi_owner" atau "dev_ganteng" di bawah ini dengan password rahasia buatanmu!
+    if (nama === "hazfi_owner" || nama === "dev_ganteng") {
+        inputRole.disabled = false; // Buka gembok kolom role
+        inputRole.style.borderColor = "#228be6"; // Ubah border jadi biru tanda aktif
+        if (inputRole.value === "Member") {
+            inputRole.value = ""; // Kosongkan tulisan "Member" biar kamu bisa ketik Owner/Dev
+        }
+    } else {
+        inputRole.disabled = true; // Kunci kembali jadi member jika nama dihapus/diganti
+        inputRole.value = "Member";
+        inputRole.style.borderColor = "";
+    }
+}
+
+// ============================================================
+// 📥 PROSES SUBMIT & PENGIRIMAN DATA FORMULIR KE FIREBASE
+// ============================================================
+document.getElementById("form-member").addEventListener("submit", async function(event) {
+    event.preventDefault(); // Mencegah halaman refresh otomatis
+
     const namaBaru = document.getElementById("input-nama").value;
-    const roleBaru = document.getElementById("input-role").value;
-    const gamesBaru = document.getElementById("input-games").value;
+    const roleBaru = document.getElementById("input-role").value; // Mengambil teks role (bisa Member/Owner/Dev)
     const bioBaru = document.getElementById("input-bio").value;
     const avatarBaru = document.getElementById("input-avatar").value;
 
-    // Dapatkan tanggal hari ini otomatis
+    // Logika menentukan isi game favorit (apakah dari dropdown atau dari input manual)
+    const gameDropdown = document.getElementById("select-games").value;
+    let gamesFinal = gameDropdown;
+    
+    if (gameDropdown === "lainnya") {
+        gamesFinal = document.getElementById("input-game-manual").value; // Ambil isi dari ketikan manual
+    }
+
     const tanggalHariIni = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    // Bungkus data menjadi format JSON
     const dataMemberBaru = {
         nama: namaBaru,
         role: roleBaru,
-        games: gamesBaru,
+        games: gamesFinal, // Memakai game final yang sudah diseleksi di atas
         bio: bioBaru,
         avatarSeed: avatarBaru,
         joinDate: tanggalHariIni
     };
 
     try {
-        // Kirim data secara LIVE ke Firebase menggunakan metode POST
         const respon = await fetch(URL_DATABASE, {
-            method: "POST", // Metode POST artinya "menambah/menulis data baru" ke database
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -38,10 +82,13 @@ document.getElementById("form-member").addEventListener("submit", async function
         if (respon.ok) {
             // Tampilkan pesan sukses di layar
             document.getElementById("pesan-sukses").style.display = "block";
-            // Bersihkan isi formulir agar bisa diisi orang lain lagi
             document.getElementById("form-member").reset();
             
-            // Sembunyikan kembali pesan sukses setelah 3 detik
+            // Kembalikan form ke kondisi terkunci normal (default) setelah beres submit
+            document.getElementById("input-role").disabled = true;
+            document.getElementById("input-role").value = "Member";
+            document.getElementById("box-game-lainnya").style.display = "none";
+
             setTimeout(() => {
                 document.getElementById("pesan-sukses").style.display = "none";
             }, 3000);

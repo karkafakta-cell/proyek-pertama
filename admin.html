@@ -23,17 +23,33 @@
             <form id="form-member" class="card-member card-form">
                 <div class="form-group">
                     <label class="form-label">Nama Discord:</label>
-                    <input type="text" id="input-nama" class="form-input" required>
+                    <!-- Ditambahkan oninput="cekNama()" untuk memicu gembok rahasia di JS -->
+                    <input type="text" id="input-nama" class="form-input" oninput="cekNama()" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Role / Jabatan:</label>
-                    <input type="text" id="input-role" class="form-input" required>
+                    <!-- Otomatis terkunci (disabled) bertuliskan Member -->
+                    <input type="text" id="input-role" class="form-input" value="Member" disabled required>
+                    <small style="color: #868e96; display: block; margin-top: 5px; font-size: 11px;">*Terkunci otomatis sebagai Member.</small>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Game Favorit:</label>
-                    <input type="text" id="input-games" class="form-input" required>
+                    <!-- Input text diganti menjadi dropdown <select> cerdas -->
+                    <select id="select-games" class="form-input" onchange="cekPilihanGame()" required>
+                        <option value="Valorant">Valorant</option>
+                        <option value="Minecraft">Minecraft</option>
+                        <option value="Roblox">Roblox</option>
+                        <option value="Mobile Legends">Mobile Legends</option>
+                        <option value="lainnya">Dan Lainnya... (Input Sendiri)</option>
+                    </select>
+                </div>
+
+                <!-- Kotak rahasia tambahan, otomatis muncul jika user memilih "Dan Lainnya..." -->
+                <div class="form-group" id="box-game-lainnya" style="display: none;">
+                    <label class="form-label">Ketik Game Kamu:</label>
+                    <input type="text" id="input-game-manual" class="form-input" placeholder="Misal: GTA V, PB, DOTA 2">
                 </div>
 
                 <div class="form-group">
