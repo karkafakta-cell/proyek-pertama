@@ -43,9 +43,23 @@ document.getElementById("form-member").addEventListener("submit", async function
 
     const namaBaru = document.getElementById("input-nama").value;
     const roleBaru = document.getElementById("input-role").value;
-    const bioBaru = document.getElementById("input-bio").value;
     
-    // 🌟 PERBAIKAN 1: Menangkap file gambar asli dari File Explorer
+    // 🌟 PERBAIKAN: Ambil teks bio, bersihkan spasi, dan cek jika kosong pilih acak!
+    let bioBaru = document.getElementById("input-bio").value.trim();
+    if (bioBaru === "") {
+        const kumpulanBioKocak = [
+            "Turu nomor 2, Mabar nomor 1! 🎮",
+            "Maju paling depan, mati paling awal. Awokwkaok. 💀",
+            "Cuma anak Discord biasa yang hobi nginep di Voice Channel. 🍿",
+            "Sorry klo noob, pingnya ga ngotak anying. 📶",
+            "Ayo main, having fun ajahhh. 😊✨",
+            "Banggg, pungut ak bangg... 🥺👉👈"
+        ];
+        const angkaAcak = Math.floor(Math.random() * kumpulanBioKocak.length);
+        bioBaru = kumpulanBioKocak[angkaAcak];
+    }
+
+    // Menangkap file gambar asli dari File Explorer
     const fileGambar = document.getElementById("input-avatar-file").files[0];
 
     // Logika menentukan isi game favorit
@@ -62,8 +76,8 @@ document.getElementById("form-member").addEventListener("submit", async function
         nama: namaBaru,
         role: roleBaru,
         games: gamesFinal,
-        bio: bioBaru,
-        avatarSeed: "", // Sengaja dikosongkan dulu, nanti diisi oleh pembaca file di bawah
+        bio: bioBaru, // Menggunakan variabel bioBaru yang sudah diproses di atas
+        avatarSeed: "", 
         joinDate: tanggalHariIni
     };
 
@@ -73,13 +87,13 @@ document.getElementById("form-member").addEventListener("submit", async function
         return;
     }
 
-    // 🌟 PERBAIKAN 2: Proses konversi file gambar galeri menjadi kode teks (Base64) secara otomatis
+    // Proses konversi file gambar galeri menjadi kode teks (Base64) secara otomatis
     const reader = new FileReader();
     reader.readAsDataURL(fileGambar);
     
     reader.onloadend = async function() {
         const fotoDalamBentukTeks = reader.result;
-        dataMemberBaru.avatarSeed = fotoDalamBentukTeks; // Masukkan teks gambar ke objek data
+        dataMemberBaru.avatarSeed = fotoDalamBentukTeks;
 
         try {
             const respon = await fetch(URL_DATABASE, {
@@ -110,5 +124,5 @@ document.getElementById("form-member").addEventListener("submit", async function
             console.error("Error:", error);
             alert("Terjadi kesalahan koneksi!");
         }
-    }; // 🌟 PERBAIKAN 3: Penutup fungsi FileReader
+    }; 
 });

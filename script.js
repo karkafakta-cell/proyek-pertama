@@ -40,7 +40,7 @@ async function ambilDataDariDatabase() {
                 urlAvatar = member.avatarSeed;
             } else {
                 // Jika isinya ketikan teks biasa (misal: Budi), buat jadi robot otomatis versi 9.x yang aktif
-                urlAvatar = `https://dicebear.com{member.avatarSeed}`;
+                urlAvatar = `https://dicebear.com/api/initials/${member.avatarSeed}`;
             }
 
             kartu.innerHTML = `
