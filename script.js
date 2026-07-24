@@ -89,10 +89,24 @@ async function ambilDataDariDatabase() {
     }
 }
 
-// 3. FUNGSI POP-UP DETAIL
+// 🌟 TIMPA FUNGSI POP-UP DETAIL PROFIL YANG LAMA DENGAN INI:
 function bukaProfil(member) {
     const modal = document.getElementById("modal-profil");
     
+    // 1. Logika penentuan foto (Sama persis seperti logika di kartu depan)
+    let urlAvatar = member.avatarSeed;
+    if (!urlAvatar) {
+        urlAvatar = "https://w3schools.com";
+    } else if (urlAvatar.startsWith("data:image") || urlAvatar.startsWith("http")) {
+        urlAvatar = member.avatarSeed;
+    } else {
+        urlAvatar = `https://dicebear.com{member.avatarSeed}`;
+    }
+
+    // 2. Tembakkan link foto ke elemen gambar di HTML modal yang baru kita buat
+    document.getElementById("modal-avatar").src = urlAvatar;
+    
+    // 3. Masukkan data teks seperti biasa
     document.getElementById("modal-nama").innerText = member.nama || "-";
     document.getElementById("modal-role").innerText = member.role || "-";
     document.getElementById("modal-games").innerText = member.games || "-";
@@ -101,6 +115,7 @@ function bukaProfil(member) {
     
     modal.style.display = "block";
 }
+
 
 function tutupProfil() {
     document.getElementById("modal-profil").style.display = "none";

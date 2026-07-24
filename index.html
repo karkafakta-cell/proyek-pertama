@@ -60,20 +60,26 @@
     </main>
 
     <!-- KOTAK POP-UP DETAIL PROFIL (MODAL) -->
-    <div id="modal-profil" class="modal-bg">
-        <div class="modal-content">
-            <span class="btn-tutup" onclick="tutupProfil()">&times;</span>
-            <div class="modal-header">
-                <h3 id="modal-nama">Nama Member</h3>
-                <p id="modal-role" class="role">Role</p>
-            </div>
-            <div class="modal-body">
-                <p><strong>🎮 Game Favorit:</strong> <span id="modal-games">-</span></p>
-                <p><strong>📝 Status/Bio:</strong> <span id="modal-bio">-</span></p>
-                <p><strong>📅 Bergabung:</strong> <span id="modal-join">-</span></p>
-            </div>
+<!-- CARI KODE MODAL LAMA, LALU TIMPA BAGIAN INI: -->
+<div id="modal-profil" class="modal-bg">
+    <div class="modal-content">
+        <span class="btn-tutup" onclick="tutupProfil()">&times;</span>
+        
+        <div class="modal-header" style="text-align: center; margin-bottom: 20px;">
+            <!-- 🌟 SISIPKAN TAG IMAG YANG INI BIAR FOTONYA MUNCUL DI POP-UP -->
+            <img id="modal-avatar" src="" alt="Avatar" class="avatar" style="width: 100px; height: 100px; margin-bottom: 10px;">
+            <h3 id="modal-nama">Nama Member</h3>
+            <p id="modal-role" class="role">Role</p>
+        </div>
+        
+        <div class="modal-body">
+            <p><strong>🎮 Game Favorit:</strong> <span id="modal-games">-</span></p>
+            <p><strong>📝 Status/Bio:</strong> <span id="modal-bio">-</span></p>
+            <p><strong>📅 Bergabung:</strong> <span id="modal-join">-</span></p>
         </div>
     </div>
+</div>
+
 
     <script src="script.js"></script>
 </body>
