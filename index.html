@@ -8,8 +8,13 @@
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
         <h1 class="nav-logo">👾 DISCORD SQUAD</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="admin.html" class="link-admin">+ Tambah Member</a>
+        </div>
     </nav>
 
     <header class="hero">
@@ -18,12 +23,37 @@
     </header>
 
     <main class="container">
+        
+        <!-- BAGIAN 1: PROFIL MEMBER -->
         <section class="section-box">
             <h3 class="section-title">👑 Member Cyber Aktif</h3>
-            
-            <!-- 🔽 Kotak ini sengaja dikosongkan, nanti diisi otomatis oleh script.js -->
             <div id="grid-member" class="grid-member"></div>
         </section>
+
+        <!-- BAGIAN 2: GALERI MEDIAMU (SUDAH BERSIH) -->
+        <section id="galeri" class="section-box">
+            <h3 class="section-title">🎬 Dokumentasi Keseruan Mabar</h3>
+            <div class="grid-member">
+                
+                <!-- KOTAK MEDIA 1: FOTO SCREENSHOT -->
+                <div class="card-member card-media">
+                    <img src="https://unsplash.com" alt="Mabar" class="img-galeri">
+                    <h4 class="media-title">Malam Minggu Mabar Valorant</h4>
+                    <p class="media-desc">Moment pas kita kena comeback epic 12-14 di Map Ascent. Sakit bgt!</p>
+                </div>
+
+                <!-- KOTAK MEDIA 2: VIDEO CLIP (EMBED YOUTUBE) -->
+                <div class="card-member card-media">
+                    <div class="video-container">
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <h4 class="media-title">Clip Lucu: Salah Lempar Bomb</h4>
+                    <p class="media-desc">Clip kocak si Budi salah pencet tombol ulti pas lagi defuse spike wkwk.</p>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- KOTAK POP-UP DETAIL PROFIL (MODAL) -->
