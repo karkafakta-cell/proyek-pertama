@@ -69,7 +69,7 @@ function bukaProfil(index) {
 }
 
 function tutupProfil() {
-    document.getElementById("modal-profil").style.style.display = "none";
+    document.getElementById("modal-profil").style.display = "none";
 }
 
 // Jalankan pencetakan kartu saat halaman web pertama kali dibuka
