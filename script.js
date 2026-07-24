@@ -4,7 +4,7 @@ const URL_DATABASE = "https://valo-discord-db-default-rtdb.asia-southeast1.fireb
 // 2. FUNGSI UNTUK MENGAMBIL DATA (FETCHING) DARI DATABASE ASLI
 async function ambilDataDariDatabase() {
     const gridContainer = document.getElementById("grid-member");
-    gridContainer.innerHTML = "<p style='color: #00ffcc;'>Menghubungkan ke database cloud...</p>";
+    gridContainer.innerHTML = "<p style='color: #228be6;'>Menghubungkan ke database cloud...</p>";
 
     try {
         const respon = await fetch(URL_DATABASE);
@@ -19,42 +19,44 @@ async function ambilDataDariDatabase() {
         }
 
         // ============================================================
-        // 🔽 DI SINI LETAK KODE YANG KAMU TANYAKAN TADI TEMPATNYA 🔽
+        // 🌟 LOGIKA PEMBACAAN DATA: SUDAH DIPERBAIKI UTK FOTO GALERI
         // ============================================================
-// HAPUS logika let urlAvatar yang lama, lalu PASTE versi baru ini di dalam kartu.innerHTML kalian:
+        Object.keys(dataJson).forEach((key) => {
+            const member = dataJson[key];
+            if (!member || !member.nama) return;
 
-    Object.keys(dataJson).forEach((key) => {
-         const member = dataJson[key];
-        if (!member || !member.nama) return;
+            const kartu = document.createElement("div");
+            kartu.className = "card-member";
+            kartu.onclick = () => bukaProfil(member);
 
-        const kartu = document.createElement("div");
-        kartu.className = "card-member";
-        kartu.onclick = () => bukaProfil(member);
+            // LOGIKA AVATAR SUPER PINTAR:
+            let urlAvatar = member.avatarSeed;
+            
+            if (!urlAvatar) {
+                // Jika data foto kosong, kasih foto siluet abu-abu bawaan
+                urlAvatar = "https://w3schools.com";
+            } else if (urlAvatar.startsWith("data:image") || urlAvatar.startsWith("http")) {
+                // SAKTI! Jika isinya FOTO GALERI (data:image) atau LINK INTERNET (http), gunakan langsung gambarnya!
+                urlAvatar = member.avatarSeed;
+            } else {
+                // Jika isinya ketikan teks biasa (misal: Budi), buat jadi robot otomatis versi 9.x yang aktif
+                urlAvatar = `https://dicebear.com{member.avatarSeed}`;
+            }
 
-        // 🌟 LOGIKA AVATAR BARU: Jika isinya link internet (http) pakai linknya, jika teks biasa pakai API bottts terbaru
-        let urlAvatar = member.avatarSeed;
-        if (!urlAvatar || !urlAvatar.startsWith("http")) {
-        // Kita pakai versi API Dicebear terbaru (/9.x/bottts/svg) agar gambarnya dijamin muncul
-        urlAvatar = `https://dicebear.com{member.avatarSeed || 'default'}`;
-    }
-
-    kartu.innerHTML = `
-        <img src="${urlAvatar}" alt="Avatar" class="avatar">
-        <h4>${member.nama}</h4>
-        <p class="role">${member.role}</p>
-        <button class="btn-detail">Lihat Profil</button>
-    `;
-    
-    gridContainer.appendChild(kartu);
-});
-
-        // ============================================================
-        // 🔼 BATAS KODE PERUBAHAN 🔼
+            kartu.innerHTML = `
+                <img src="${urlAvatar}" alt="Avatar" class="avatar">
+                <h4>${member.nama}</h4>
+                <p class="role">${member.role || "Member"}</p>
+                <button class="btn-detail">Lihat Profil</button>
+            `;
+            
+            gridContainer.appendChild(kartu);
+        });
         // ============================================================
 
     } catch (error) {
         console.error("Gagal koneksi ke database:", error);
-        gridContainer.innerHTML = "<p style='color: #ff007f;'>Gagal menyambungkan ke database asli!</p>";
+        gridContainer.innerHTML = "<p style='color: #fa5252; font-weight: bold;'>Gagal menyambungkan ke database asli!</p>";
     }
 }
 
@@ -62,11 +64,11 @@ async function ambilDataDariDatabase() {
 function bukaProfil(member) {
     const modal = document.getElementById("modal-profil");
     
-    document.getElementById("modal-nama").innerText = member.nama;
-    document.getElementById("modal-role").innerText = member.role;
-    document.getElementById("modal-games").innerText = member.games;
-    document.getElementById("modal-bio").innerText = member.bio;
-    document.getElementById("modal-join").innerText = member.joinDate;
+    document.getElementById("modal-nama").innerText = member.nama || "-";
+    document.getElementById("modal-role").innerText = member.role || "-";
+    document.getElementById("modal-games").innerText = member.games || "-";
+    document.getElementById("modal-bio").innerText = member.bio || "-";
+    document.getElementById("modal-join").innerText = member.joinDate || "-";
     
     modal.style.display = "block";
 }
