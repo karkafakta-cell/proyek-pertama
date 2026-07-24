@@ -1,42 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tes Github</title>
+    <title>Discord Squad Blog</title>
+    <!-- 🔽 JALUR PENGHUBUNG: Baris di bawah ini gunanya untuk memanggil file CSS kamu -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-        </ul>
-    </div>
 
-    <div>
-        <h1>Welcome to My Website</h1>
-        <p>This is a simple HTML page to test GitHub integration.</p>
-    </div>
+    <!-- 1. NAVIGATION BAR -->
+    <nav class="navbar">
+        <h1 class="nav-logo">👾 SQUAD DISCORD</h1>
+        <div class="nav-links">
+            <a href="#kegiatan">Kegiatan</a>
+            <a href="#galeri">Galeri</a>
+            <a href="#member">Member</a>
+        </div>
+    </nav>
 
-    <div>
-        <h2>Features</h2>
-        <ul>
-            <li>Responsive Design</li>
-            <li>Easy Navigation</li>
-            <li>Clean Layout</li>
-        </ul>
-    </div>
+    <!-- 2. HERO SECTION -->
+    <header class="hero">
+        <h2>Basecamp Digital Kami</h2>
+        <p>Tempat menyimpan kenangan mabar, clip lucu, dan profil anak-anak Discord.</p>
+    </header>
 
-    <div>
-        <h2>Contact Information</h2>
-        <p>Email: example@example.com</p>
-    </div>
+    <!-- KONTEN UTAMA -->
+    <main class="container">
 
-    <div>
-        <footer>
-            <p>&copy; 2023 My Website. All rights reserved.</p>
-        </footer>
-    </div>
+        <!-- 3. BAGIAN KEGIATAN -->
+        <section id="kegiatan" class="section-box">
+            <h3 class="section-title">📅 Kegiatan Seru</h3>
+            <div class="card-kegiatan">
+                <img src="https://unsplash.com" alt="Mabar" class="img-kegiatan">
+                <div class="card-body">
+                    <h4>Malam Minggu Mabar Valorant</h4>
+                    <p>Keseruan custom match 5v5 kemarin malam. Tim A kena comeback epic!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. BAGIAN GALERI -->
+        <section id="galeri" class="section-box">
+            <h3 class="section-title">🎬 Foto & Video Clip</h3>
+            <div class="card-galeri">
+                <p>Moments Lucu: Detik-detik salah lempar bomb</p>
+                <div class="video-placeholder">
+                    <span>📺 [Taruh Embed Video Di Sini]</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. BAGIAN PROFIL MEMBER -->
+        <section id="member" class="section-box">
+            <h3 class="section-title">👑 Member Paling Aktif</h3>
+            <div class="grid-member">
+                <!-- Kartu Member 1 -->
+                <div class="card-member">
+                    <img src="https://dicebear.com" alt="Avatar" class="avatar">
+                    <h4>Andi_Gamer</h4>
+                    <p class="role">Server Owner</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
 </body>
 </html>

@@ -1,0 +1,106 @@
+/* 1. ATURAN DASAR (Reset & Warna Background Web) */
+body {
+    background-color: #1a1c23; /* Warna abu-abu gelap khas Discord */
+    color: #ffffff; /* Warna tulisan putih */
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. DESAIN MENU ATAS (NAVBAR) */
+.navbar {
+    background-color: #202225;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+.nav-logo {
+    color: #7289da; /* Warna biru ungu khas Discord */
+    margin: 0;
+    font-size: 20px;
+}
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    margin-left: 20px;
+}
+.nav-links a:hover {
+    color: #7289da; /* Warna berubah saat kursor menyentuh link */
+}
+
+/* 3. DESAIN BANNER UTAMA (HERO) */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(#2f3136, #1a1c23);
+}
+.hero p {
+    color: #b9bbbe;
+}
+
+/* 4. DESAIN KOTAK KONTEN (CONTAINER) */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.section-box {
+    margin-bottom: 50px;
+}
+.section-title {
+    border-bottom: 2px solid #7289da;
+    padding-bottom: 10px;
+}
+
+/* 5. DESAIN KARTU KEGIATAN & PROFIL */
+.card-kegiatan, .card-galeri, .card-member {
+    background-color: #2f3136;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Kartu Kegiatan */
+.card-kegiatan {
+    max-width: 400px;
+}
+.img-kegiatan {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.card-body {
+    padding: 15px;
+}
+
+/* Kotak Video */
+.video-placeholder {
+    background-color: #040405;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #72767d;
+}
+
+/* Kartu Profil Member */
+.grid-member {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+.card-member {
+    text-align: center;
+    padding: 20px;
+}
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #202225;
+}
+.role {
+    color: #7289da;
+    font-size: 12px;
+    font-weight: bold;
+}
